@@ -18,6 +18,7 @@ AEPSampleExtension
 
   s.source_files          = 'AEPSampleExtension/AEPSampleExtension/**/*.swift'
 
-    s.dependency =  'AEPServices', 'AEPEventhub'
+    s.dependency 'AEPServices'
+    s.dependency 'AEPEventhub'
 
 end
