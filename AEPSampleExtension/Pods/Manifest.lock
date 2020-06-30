@@ -1,0 +1,32 @@
+PODS:
+  - AEPEventhub (0.0.1):
+    - AEPServices
+  - AEPServices (0.0.1)
+
+DEPENDENCIES:
+  - "AEPEventhub (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `cocoapod`)"
+  - "AEPServices (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `cocoapod`)"
+
+EXTERNAL SOURCES:
+  AEPEventhub:
+    :branch: cocoapod
+    :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
+  AEPServices:
+    :branch: cocoapod
+    :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
+
+CHECKOUT OPTIONS:
+  AEPEventhub:
+    :commit: e0aff259ee9e2fcdb34fe3d25cdeab247b6e9de8
+    :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
+  AEPServices:
+    :commit: e0aff259ee9e2fcdb34fe3d25cdeab247b6e9de8
+    :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
+
+SPEC CHECKSUMS:
+  AEPEventhub: 909d7ad641d653baaf23a80a59ef90d099a2156c
+  AEPServices: 9e5dabf80229214e8d2ad00d81436fcb0175a41b
+
+PODFILE CHECKSUM: 4d26a3f69c01ecfdd8408866174cceb4b466c53a
+
+COCOAPODS: 1.8.4

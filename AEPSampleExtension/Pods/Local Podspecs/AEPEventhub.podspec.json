@@ -1,0 +1,25 @@
+{
+  "name": "AEPEventhub",
+  "version": "0.0.1",
+  "summary": "AEPEventhub",
+  "description": "AEPEventhub",
+  "homepage": "https://github.com/adobe/aepsdk-core-ios",
+  "license": "Apache V2",
+  "authors": "Adobe Experience Platform SDK Team",
+  "source": {
+    "git": "https://github.com/adobe/aepsdk-core-ios",
+    "tag": "0.0.1"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "AEPEventhub/Sources/**/*.swift",
+  "swift_versions": "5.0",
+  "dependencies": {
+    "AEPServices": [
+
+    ]
+  },
+  "swift_version": "5.0"
+}

@@ -1,0 +1,6 @@
+module AEPEventhub {
+  umbrella header "AEPEventhub-umbrella.h"
+
+  export *
+  module * { export * }
+}
