@@ -1,0 +1,11 @@
+framework module AEPSampleExtension {
+  umbrella header "AEPSampleExtension.h"
+
+  export *
+  module * { export * }
+}
+
+module AEPSampleExtension.Swift {
+    header "AEPSampleExtension-Swift.h"
+    requires objc
+}

@@ -1,11 +1,14 @@
 PODS:
   - AEPEventhub (0.0.1):
     - AEPServices
+    - SwiftRulesEngine
   - AEPServices (0.0.1)
+  - SwiftRulesEngine (0.0.1)
 
 DEPENDENCIES:
   - "AEPEventhub (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `cocoapod`)"
   - "AEPServices (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `cocoapod`)"
+  - "SwiftRulesEngine (from `git@github.com:shalehaha/aepsdk-rulesengine-ios.git`, branch `dev`)"
 
 EXTERNAL SOURCES:
   AEPEventhub:
@@ -14,19 +17,26 @@ EXTERNAL SOURCES:
   AEPServices:
     :branch: cocoapod
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
+  SwiftRulesEngine:
+    :branch: dev
+    :git: "git@github.com:shalehaha/aepsdk-rulesengine-ios.git"
 
 CHECKOUT OPTIONS:
   AEPEventhub:
-    :commit: e0aff259ee9e2fcdb34fe3d25cdeab247b6e9de8
+    :commit: d43a76e538033482e4ace16e010ba55681fd5137
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   AEPServices:
-    :commit: e0aff259ee9e2fcdb34fe3d25cdeab247b6e9de8
+    :commit: d43a76e538033482e4ace16e010ba55681fd5137
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
+  SwiftRulesEngine:
+    :commit: 467fcc0e046971ce2ed1ca379e50fcc327c8d3a8
+    :git: "git@github.com:shalehaha/aepsdk-rulesengine-ios.git"
 
 SPEC CHECKSUMS:
-  AEPEventhub: 909d7ad641d653baaf23a80a59ef90d099a2156c
+  AEPEventhub: 16ca79c07a2eb329bc55b90f73fb60a8e1df5577
   AEPServices: 9e5dabf80229214e8d2ad00d81436fcb0175a41b
+  SwiftRulesEngine: 61ffafd22c9f1d2e09b344fcad15069e362c9ac1
 
-PODFILE CHECKSUM: 4d26a3f69c01ecfdd8408866174cceb4b466c53a
+PODFILE CHECKSUM: 2a908b89df4ffd7d4425582a0503980002ab6964
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

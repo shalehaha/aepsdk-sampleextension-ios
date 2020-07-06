@@ -17,6 +17,7 @@ public typealias EventListener = (Event) -> Void
 public typealias EventResponseListener = (Event?) -> Void
 public typealias SharedStateResolver = ([String: Any]?) -> Void
 public typealias EventHandlerMapping = (event: Event, handler: (Event) -> (Bool))
+public typealias EventPreprocessor = (Event) -> Event
 
 /// Responsible for delivering events to listeners and maintaining registered extension's lifecycle.
 final public class EventHub {
@@ -30,7 +31,8 @@ final public class EventHub {
     #if DEBUG
     public internal(set) static var shared = EventHub()
     #else
-    internal static let shared = EventHub()
+    //TODO: fix public
+    public static let shared = EventHub()
     #endif
 
 
@@ -39,8 +41,15 @@ final public class EventHub {
     init() {
         // Setup eventQueue handler for the main OperationOrderer
         eventQueue.setHandler { (event) -> Bool in
+            let processedEvent = self.registeredExtensions.shallowCopy.values
+                .filter { $0.preprocessor != nil}
+                .reduce(event) { currentEvent, extensionContainer in
+                    extensionContainer.preprocessor?(currentEvent) ?? currentEvent
+            }
+            
+            
             // Handle response event listeners first
-            if let responseID = event.responseID {
+            if let responseID = processedEvent.responseID {
                 _ = self.responseEventListeners.filterRemove { (eventListenerContainer: EventListenerContainer) -> Bool in
                     guard eventListenerContainer.triggerEventId == responseID else { return false }
                     eventListenerContainer.timeoutTask?.cancel()
@@ -51,7 +60,7 @@ final public class EventHub {
 
             // Send event to each ExtensionContainer
             self.registeredExtensions.shallowCopy.values.forEach {
-                $0.eventOrderer.add(event)
+                $0.eventOrderer.add(processedEvent)
             }
             
             return true

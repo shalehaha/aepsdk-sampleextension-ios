@@ -115,6 +115,11 @@ public extension Extension {
     func stopEvents() {
         getExtensionContainer()?.eventOrderer.stop()
     }
+    
+    internal func registerEventPreprocessor(preprocessor: @escaping EventPreprocessor){
+        getExtensionContainer()?.preprocessor = preprocessor
+    
+    }
 }
 
 /// Contains methods that we don't want developers accessing

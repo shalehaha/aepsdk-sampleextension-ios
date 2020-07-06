@@ -1,0 +1,159 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SwiftRulesEngine
+import Foundation
+import Swift
+@_exported import SwiftRulesEngine
+public struct ComparisonExpression<A, B> : SwiftRulesEngine.Evaluable {
+  public init(lhs: SwiftRulesEngine.Operand<A>, operationName: Swift.String, rhs: SwiftRulesEngine.Operand<B>)
+  public func evaluate(in context: SwiftRulesEngine.Context) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+}
+public class ConditionEvaluator : SwiftRulesEngine.Evaluating {
+  public func evaluate<A>(operation: Swift.String, lhs: A) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+  public func evaluate<A, B>(operation: Swift.String, lhs: A, rhs: B) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+  @objc deinit
+}
+extension ConditionEvaluator {
+  public func addUnaryOperator<A>(operation: Swift.String, closure: @escaping (A) -> Swift.Bool)
+  public func addComparisonOperator<A, B>(operation: Swift.String, closure: @escaping (A, B) -> Swift.Bool)
+  public func addComparisonOperator<A>(operation: Swift.String, type: A.Type, closure: @escaping (A, A) -> Swift.Bool)
+}
+extension ConditionEvaluator {
+  public struct Options : Swift.OptionSet {
+    public let rawValue: Swift.Int
+    public static let defaultOptions: SwiftRulesEngine.ConditionEvaluator.Options
+    public static let caseInsensitive: SwiftRulesEngine.ConditionEvaluator.Options
+    public init(rawValue: Swift.Int)
+    public typealias Element = SwiftRulesEngine.ConditionEvaluator.Options
+    public typealias ArrayLiteralElement = SwiftRulesEngine.ConditionEvaluator.Options
+    public typealias RawValue = Swift.Int
+  }
+  convenience public init(options: SwiftRulesEngine.ConditionEvaluator.Options)
+}
+public class ConsequenceRule : SwiftRulesEngine.Evaluable {
+  final public let id: Swift.String
+  final public let condition: SwiftRulesEngine.Evaluable
+  final public let consequnces: [Swift.String]
+  public init(id: Swift.String, condition: SwiftRulesEngine.Evaluable, consequnces: [Swift.String] = [])
+  public func evaluate(in context: SwiftRulesEngine.Context) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+  @objc deinit
+}
+public struct ConjunctionExpression : SwiftRulesEngine.Evaluable {
+  public let operands: [SwiftRulesEngine.Evaluable]
+  public let operationName: Swift.String
+  public init(operationName: Swift.String, operands: SwiftRulesEngine.Evaluable...)
+  public init(operationName: Swift.String, operands: [SwiftRulesEngine.Evaluable])
+  public func evaluate(in context: SwiftRulesEngine.Context) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+}
+public protocol Evaluable {
+  func evaluate(in context: SwiftRulesEngine.Context) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+}
+public protocol Evaluating {
+  func evaluate<A, B>(operation: Swift.String, lhs: A, rhs: B) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+  func evaluate<A>(operation: Swift.String, lhs: A) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+}
+indirect public enum MustacheToken {
+  case variable(text: Swift.String)
+  case function(content: Swift.String, inner: SwiftRulesEngine.MustacheToken)
+  public init(_ tokenString: Swift.String)
+  public func resolve(in transformer: SwiftRulesEngine.Transforming, data: SwiftRulesEngine.Traversable) -> Any?
+}
+extension Operand : Swift.ExpressibleByBooleanLiteral where T == Swift.Bool {
+  public init(booleanLiteral value: Swift.Bool)
+  public typealias BooleanLiteralType = Swift.Bool
+}
+extension Operand : Swift.ExpressibleByFloatLiteral where T == Swift.Double {
+  public init(floatLiteral value: Swift.Double)
+  public typealias FloatLiteralType = Swift.Double
+}
+extension Operand : Swift.ExpressibleByIntegerLiteral where T == Swift.Int {
+  public init(integerLiteral value: Swift.Int)
+  public typealias IntegerLiteralType = Swift.Int
+}
+extension Operand : Swift.ExpressibleByNilLiteral {
+  public init(nilLiteral: ())
+}
+extension Operand : Swift.ExpressibleByUnicodeScalarLiteral where T == Swift.String {
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+}
+extension Operand : Swift.ExpressibleByExtendedGraphemeClusterLiteral where T == Swift.String {
+  public typealias UnicodeScalarLiteralType = Swift.String
+}
+extension Operand : Swift.ExpressibleByStringLiteral where T == Swift.String {
+  public init(stringLiteral value: Swift.String)
+  public typealias StringLiteralType = Swift.String
+}
+@dynamicCallable public enum Operand<T> {
+  case none
+  case some(T)
+  case token(SwiftRulesEngine.MustacheToken)
+  public func dynamicallyCall(withArguments args: [SwiftRulesEngine.Context]) -> T?
+}
+extension Operand {
+  public init(mustache: Swift.String)
+}
+extension Operand : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension MustacheToken {
+  public func resolve(in context: SwiftRulesEngine.Context) -> Any?
+}
+extension RulesFailure : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public typealias RulesTracer = (Swift.Bool, SwiftRulesEngine.Evaluable, SwiftRulesEngine.Context, SwiftRulesEngine.RulesFailure?) -> Swift.Void
+public class RulesEngine<R> where R : SwiftRulesEngine.Evaluable {
+  public init(evaluator: SwiftRulesEngine.Evaluating, transformer: SwiftRulesEngine.Transforming = Transform())
+  public func evaluate(data: SwiftRulesEngine.Traversable) -> [SwiftRulesEngine.Evaluable]
+  public func addRules(rules: [R])
+  public func trace(with tracer: @escaping SwiftRulesEngine.RulesTracer)
+  @objc deinit
+}
+public struct Context {
+  public let data: SwiftRulesEngine.Traversable
+  public let evaluator: SwiftRulesEngine.Evaluating
+  public let transformer: SwiftRulesEngine.Transforming
+}
+public enum RulesFailure : Swift.Error {
+  case unknown
+  case conditionNotMatched(message: Swift.String)
+  case typeMismatched(message: Swift.String)
+  case missingOperator(message: Swift.String)
+  indirect case innerFailure(message: Swift.String, error: SwiftRulesEngine.RulesFailure)
+  indirect case innerFailures(message: Swift.String, errors: [SwiftRulesEngine.RulesFailure])
+}
+public class Template {
+  public init(templateString: Swift.String)
+  public func render(data: SwiftRulesEngine.Traversable, transformers: SwiftRulesEngine.Transforming) -> Swift.String
+  @objc deinit
+}
+public typealias DelimiterPair = (Swift.String, Swift.String)
+public struct TemplateParser {
+}
+public struct MustacheError : Swift.Error {
+  public let message: Swift.String?
+  public init(message: Swift.String? = nil)
+}
+public struct TemplateToken {
+}
+public typealias Transformation = (Any) -> Any
+public protocol Transforming {
+  func transform(name: Swift.String, parameter: Any) -> Any
+}
+public class Transform : SwiftRulesEngine.Transforming {
+  public init()
+  public func transform(name: Swift.String, parameter: Any) -> Any
+  public func register(name: Swift.String, transformation: @escaping SwiftRulesEngine.Transformation)
+  @objc deinit
+}
+public protocol Traversable {
+  subscript(traverse key: Swift.String) -> Any? { get }
+}
+public struct UnaryExpression<A> : SwiftRulesEngine.Evaluable {
+  public init(lhs: SwiftRulesEngine.Operand<A>, operationName: Swift.String)
+  public func evaluate(in context: SwiftRulesEngine.Context) -> Swift.Result<Swift.Bool, SwiftRulesEngine.RulesFailure>
+}

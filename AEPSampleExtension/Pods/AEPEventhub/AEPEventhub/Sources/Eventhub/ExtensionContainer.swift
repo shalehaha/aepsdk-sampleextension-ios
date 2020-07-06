@@ -11,6 +11,7 @@ governing permissions and limitations under the License.
 */
 
 import Foundation
+import AEPServices
 
 /// Contains an `Extension` and additional information related to the extension
 class ExtensionContainer {
@@ -22,6 +23,8 @@ class ExtensionContainer {
     var sharedState: SharedState? = nil
     
     var sharedStateName: String? = nil
+    
+    var preprocessor : EventPreprocessor? = nil
     
     /// The extension's dispatch queue
     let extensionQueue: DispatchQueue

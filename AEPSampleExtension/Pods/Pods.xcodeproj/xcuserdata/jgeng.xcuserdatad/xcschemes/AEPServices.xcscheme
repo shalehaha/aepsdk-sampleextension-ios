@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "392DFBDE267024DDDD955DE1D112A8B3"
-               BuildableName = "libAEPServices.a"
+               BuildableName = "AEPServices.framework"
                BlueprintName = "AEPServices"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

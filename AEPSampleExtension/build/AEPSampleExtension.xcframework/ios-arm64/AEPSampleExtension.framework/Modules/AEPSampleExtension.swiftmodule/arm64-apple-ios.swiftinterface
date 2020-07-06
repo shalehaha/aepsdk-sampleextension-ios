@@ -1,0 +1,15 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target arm64-apple-ios13.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AEPSampleExtension
+import AEPEventhub
+@_exported import AEPSampleExtension
+import AEPServices
+import Foundation
+import Swift
+public struct AEPSampleExtension : AEPEventhub.Extension {
+  public init()
+  public var name: Swift.String
+  public var version: Swift.String
+  public func onRegistered()
+  public func onUnregistered()
+}

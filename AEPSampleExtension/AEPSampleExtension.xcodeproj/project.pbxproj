@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B7784A301A7DC184F8535F2 /* libPods-AEPSampleExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8122CEB465BD084CAFF7DE /* libPods-AEPSampleExtension.a */; };
 		3FC0FB2F24A9B442009820EE /* AEPSampleExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC0FB2624A9B441009820EE /* AEPSampleExtension.framework */; };
 		3FC0FB3424A9B442009820EE /* AEPSampleExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0FB3324A9B442009820EE /* AEPSampleExtensionTests.swift */; };
 		3FC0FB3624A9B442009820EE /* AEPSampleExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FC0FB2824A9B441009820EE /* AEPSampleExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FC0FB3E24A9B46A009820EE /* AEPSampleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0FB3D24A9B46A009820EE /* AEPSampleExtension.swift */; };
+		752371C03E272C79162CE0C0 /* Pods_AEPSampleExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695EFB62BBB5369EAEC0FD14 /* Pods_AEPSampleExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +32,7 @@
 		3FC0FB3324A9B442009820EE /* AEPSampleExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEPSampleExtensionTests.swift; sourceTree = "<group>"; };
 		3FC0FB3524A9B442009820EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC0FB3D24A9B46A009820EE /* AEPSampleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEPSampleExtension.swift; sourceTree = "<group>"; };
-		4A8122CEB465BD084CAFF7DE /* libPods-AEPSampleExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AEPSampleExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		695EFB62BBB5369EAEC0FD14 /* Pods_AEPSampleExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AEPSampleExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		969DE662D545B902518C1F0B /* Pods-AEPSampleExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AEPSampleExtension.debug.xcconfig"; path = "Target Support Files/Pods-AEPSampleExtension/Pods-AEPSampleExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		B5AB3CDAD4A913A005FEEC46 /* Pods-AEPSampleExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AEPSampleExtension.release.xcconfig"; path = "Target Support Files/Pods-AEPSampleExtension/Pods-AEPSampleExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B7784A301A7DC184F8535F2 /* libPods-AEPSampleExtension.a in Frameworks */,
+				752371C03E272C79162CE0C0 /* Pods_AEPSampleExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +108,7 @@
 		DDB514C704592F3FE7696457 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A8122CEB465BD084CAFF7DE /* libPods-AEPSampleExtension.a */,
+				695EFB62BBB5369EAEC0FD14 /* Pods_AEPSampleExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -390,6 +390,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 969DE662D545B902518C1F0B /* Pods-AEPSampleExtension.debug.xcconfig */;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -397,6 +398,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = NO;
 				INFOPLIST_FILE = AEPSampleExtension/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,6 +421,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5AB3CDAD4A913A005FEEC46 /* Pods-AEPSampleExtension.release.xcconfig */;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -426,6 +429,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = NO;
 				INFOPLIST_FILE = AEPSampleExtension/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (

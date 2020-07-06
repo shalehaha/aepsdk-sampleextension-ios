@@ -1,4 +1,4 @@
-module AEPEventhub {
+framework module AEPEventhub {
   umbrella header "AEPEventhub-umbrella.h"
 
   export *

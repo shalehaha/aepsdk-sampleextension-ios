@@ -1,0 +1,11 @@
+framework module AEPEventhub {
+  umbrella header "AEPEventhub-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AEPEventhub.Swift {
+    header "AEPEventhub-Swift.h"
+    requires objc
+}
