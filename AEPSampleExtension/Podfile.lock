@@ -1,42 +1,42 @@
 PODS:
-  - AEPEventHub (0.0.1):
+  - AEPCore (0.0.1):
     - AEPServices
     - SwiftRulesEngine
   - AEPServices (0.0.1)
   - SwiftRulesEngine (0.0.1)
 
 DEPENDENCIES:
-  - "AEPEventHub (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `make`)"
-  - "AEPServices (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `make`)"
-  - "SwiftRulesEngine (from `git@github.com:shalehaha/aepsdk-rulesengine-ios.git`, branch `dev`)"
+  - "AEPCore (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `build`)"
+  - "AEPServices (from `git@github.com:shalehaha/aepsdk-core-ios.git`, branch `build`)"
+  - "SwiftRulesEngine (from `git@github.com:adobe/aepsdk-rulesengine-ios.git`, branch `dev`)"
 
 EXTERNAL SOURCES:
-  AEPEventHub:
-    :branch: make
+  AEPCore:
+    :branch: build
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   AEPServices:
-    :branch: make
+    :branch: build
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   SwiftRulesEngine:
     :branch: dev
-    :git: "git@github.com:shalehaha/aepsdk-rulesengine-ios.git"
+    :git: "git@github.com:adobe/aepsdk-rulesengine-ios.git"
 
 CHECKOUT OPTIONS:
-  AEPEventHub:
-    :commit: f689e047e1244cf755029fb21c932ed86a2ca668
+  AEPCore:
+    :commit: e01e122cabeaf40b63060197222808df0533fa09
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   AEPServices:
-    :commit: f689e047e1244cf755029fb21c932ed86a2ca668
+    :commit: e01e122cabeaf40b63060197222808df0533fa09
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   SwiftRulesEngine:
-    :commit: 467fcc0e046971ce2ed1ca379e50fcc327c8d3a8
-    :git: "git@github.com:shalehaha/aepsdk-rulesengine-ios.git"
+    :commit: 49a151ec04e1405fe7a3b97796ac7cfb92490043
+    :git: "git@github.com:adobe/aepsdk-rulesengine-ios.git"
 
 SPEC CHECKSUMS:
-  AEPEventHub: 3abfc2838803b7a303593cb835a1b6ff08f12816
+  AEPCore: f48e648b917ce87693396591c7e845d464fad266
   AEPServices: d6c2385e5a7253cca195360d54051dc73aa31edb
-  SwiftRulesEngine: 61ffafd22c9f1d2e09b344fcad15069e362c9ac1
+  SwiftRulesEngine: 5b6727f221618ef9a2c84705d563d321451da0cc
 
-PODFILE CHECKSUM: affb94d7089e0525af26fbb9e1c87cd013a3e860
+PODFILE CHECKSUM: 360577a84bede4f88a5175aa0ae7c00539eb248f
 
 COCOAPODS: 1.9.3

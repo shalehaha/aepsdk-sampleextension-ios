@@ -7,14 +7,21 @@
 //
 
 import Foundation
-import AEPEventHub
+import AEPCore
 import AEPServices
 
 public struct AEPSampleExtension:Extension{
+    public var friendlyName: String = "Sample"
     
-    public init(){
-        
+    public var metadata: [String : String]? = [:]
+    
+    public var runtime: ExtensionRuntime
+    
+    public init(runtime: ExtensionRuntime) {
+        self.runtime = runtime
     }
+    
+    
     
     public var name: String = "AEPSampleExtension"
     

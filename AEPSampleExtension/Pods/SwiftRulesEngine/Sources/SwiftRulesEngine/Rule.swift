@@ -12,21 +12,6 @@
 
 import Foundation
 
-/// A type that can be traversed by the rules engine to retrieve a certain key/value pair.
-public protocol Traversable {
-    subscript(traverse _: String) -> Any? { get }
-}
-
-extension Traversable {
-    subscript(path path: [String]) -> Any? {
-        let result = path.reduce(self as Any?) {
-            switch $0 {
-            case is Traversable:
-                return ($0 as! Traversable)[traverse: $1]
-            default:
-                return nil
-            }
-        }
-        return result
-    }
+public protocol Rule {
+    var condition: Evaluable { get }
 }

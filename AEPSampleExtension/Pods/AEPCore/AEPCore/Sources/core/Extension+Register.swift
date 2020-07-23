@@ -10,29 +10,13 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+import Foundation
 
-public struct MustacheError: Error {
-
-/// Eventual error message
-    public let message: String?
-
-    public init( message: String? = nil) {
-        self.message = message
+public extension Extension {
+    
+    /// Registers the `Extension` with the `EventHub`
+    //@available(*, deprecated, message: "Use MobileCore.registerExtensions(extensions:) instead")
+    static func registerExtension() {
+        MobileCore.pendingExtensions.append(Self.self)
     }
-}
-
-public struct TemplateToken {
-    enum `Type` {
-        /// text
-        case text(String)
-
-        /// {{ content }}
-        case mustache(MustacheToken)
-
-    }
-
-    let type: Type
-    let templateString: String
-    let range: Range<String.Index>
-    var templateSubstring: String { return String(templateString[range]) }
 }
