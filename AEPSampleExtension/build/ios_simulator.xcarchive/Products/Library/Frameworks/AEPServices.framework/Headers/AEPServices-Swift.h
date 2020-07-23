@@ -226,7 +226,7 @@ SWIFT_PROTOCOL("_TtP11AEPServices9DataQueue_")
 @end
 
 /// This enum is used for building <code>NetworkRequest</code> objects.
-typedef SWIFT_ENUM(NSInteger, HttpMethod, closed) {
+typedef SWIFT_ENUM(NSInteger, HttpMethod, open) {
   HttpMethodGet = 0,
   HttpMethodPost = 1,
 };
@@ -463,7 +463,7 @@ SWIFT_PROTOCOL("_TtP11AEPServices9DataQueue_")
 @end
 
 /// This enum is used for building <code>NetworkRequest</code> objects.
-typedef SWIFT_ENUM(NSInteger, HttpMethod, closed) {
+typedef SWIFT_ENUM(NSInteger, HttpMethod, open) {
   HttpMethodGet = 0,
   HttpMethodPost = 1,
 };

@@ -201,14 +201,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 /// An enum which describes different errors from the AEP SDK can return
-typedef SWIFT_ENUM(NSInteger, AEPError, closed) {
+typedef SWIFT_ENUM(NSInteger, AEPError, open) {
   AEPErrorUnexpected = 0,
   AEPErrorCallbackTimeout = 1,
 };
 static NSString * _Nonnull const AEPErrorDomain = @"AEPEventhub.AEPError";
 
 /// An enum type representing the possible opt-out and privacy settings.
-typedef SWIFT_ENUM(NSInteger, PrivacyStatus, closed) {
+typedef SWIFT_ENUM(NSInteger, PrivacyStatus, open) {
   PrivacyStatusUnknown = 0,
   PrivacyStatusOptedIn = 1,
   PrivacyStatusOptedOut = 2,
@@ -421,14 +421,14 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 /// An enum which describes different errors from the AEP SDK can return
-typedef SWIFT_ENUM(NSInteger, AEPError, closed) {
+typedef SWIFT_ENUM(NSInteger, AEPError, open) {
   AEPErrorUnexpected = 0,
   AEPErrorCallbackTimeout = 1,
 };
 static NSString * _Nonnull const AEPErrorDomain = @"AEPEventhub.AEPError";
 
 /// An enum type representing the possible opt-out and privacy settings.
-typedef SWIFT_ENUM(NSInteger, PrivacyStatus, closed) {
+typedef SWIFT_ENUM(NSInteger, PrivacyStatus, open) {
   PrivacyStatusUnknown = 0,
   PrivacyStatusOptedIn = 1,
   PrivacyStatusOptedOut = 2,

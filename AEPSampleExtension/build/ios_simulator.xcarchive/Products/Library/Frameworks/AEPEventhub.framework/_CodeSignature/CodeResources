@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/AEPEventhub-Swift.h</key>
 		<data>
-		p1dNPa84BzlzVnwU7aTSr9YStEs=
+		2ocbk65eHev9yhx7SgEQjrfkLK4=
 		</data>
 		<key>Headers/AEPEventhub-umbrella.h</key>
 		<data>
@@ -20,33 +20,49 @@
 		<data>
 		Zykyjb6iMF6ekqyngJPBfp418F8=
 		</data>
+		<key>Modules/AEPEventhub.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
+		<data>
+		MVmHUpnfTRb9lCNG0r7LuNrFFPQ=
+		</data>
 		<key>Modules/AEPEventhub.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		DWI91VMcoXYwsBxTCyLxW7zkwgI=
+		vVvDB/YK9dlD768A0P3a17uSMhs=
 		</data>
 		<key>Modules/AEPEventhub.swiftmodule/i386.swiftdoc</key>
 		<data>
 		Zykyjb6iMF6ekqyngJPBfp418F8=
 		</data>
+		<key>Modules/AEPEventhub.swiftmodule/i386.swiftinterface</key>
+		<data>
+		MVmHUpnfTRb9lCNG0r7LuNrFFPQ=
+		</data>
 		<key>Modules/AEPEventhub.swiftmodule/i386.swiftmodule</key>
 		<data>
-		DWI91VMcoXYwsBxTCyLxW7zkwgI=
+		vVvDB/YK9dlD768A0P3a17uSMhs=
 		</data>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
 		X3FWWe73EOoIrPJJU48jmApXHXY=
 		</data>
+		<key>Modules/AEPEventhub.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<data>
+		6pTo3XcXCSs2rzgi2dp8BlHnC2g=
+		</data>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		4i/CS4k5s3cjCx8q0qKWdXVQeDg=
+		2oqTAHORyNT7ZKr+ufc2QovgH/s=
 		</data>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64.swiftdoc</key>
 		<data>
 		X3FWWe73EOoIrPJJU48jmApXHXY=
 		</data>
+		<key>Modules/AEPEventhub.swiftmodule/x86_64.swiftinterface</key>
+		<data>
+		6pTo3XcXCSs2rzgi2dp8BlHnC2g=
+		</data>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		4i/CS4k5s3cjCx8q0qKWdXVQeDg=
+		2oqTAHORyNT7ZKr+ufc2QovgH/s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -59,11 +75,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p1dNPa84BzlzVnwU7aTSr9YStEs=
+			2ocbk65eHev9yhx7SgEQjrfkLK4=
 			</data>
 			<key>hash2</key>
 			<data>
-			gfomi0uO85HXouknkmmpz5El3withA915q8r9kfwwrw=
+			Rt3IULSh6u7aaLsc2B+LXrxOJgp5N7fBxxwbjeuVdK0=
 			</data>
 		</dict>
 		<key>Headers/AEPEventhub-umbrella.h</key>
@@ -88,15 +104,26 @@
 			pDBXYG2+IVh0WyZk5zr+qclBYgdT2yc8kI946ZWQ2QA=
 			</data>
 		</dict>
+		<key>Modules/AEPEventhub.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MVmHUpnfTRb9lCNG0r7LuNrFFPQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			L8PLsQzKyyJXXXCUhuLuwzyy5eN5xli2UfkpwovfujY=
+			</data>
+		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DWI91VMcoXYwsBxTCyLxW7zkwgI=
+			vVvDB/YK9dlD768A0P3a17uSMhs=
 			</data>
 			<key>hash2</key>
 			<data>
-			iP8exfRzbKtiejcml4oIgXmVBs1p2HR/t6SSgDVX6C8=
+			eoSV/sZUGdCOVn8Wa9nUM4kld5yBxurtGcPTNLPNaAI=
 			</data>
 		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/i386.swiftdoc</key>
@@ -110,15 +137,26 @@
 			pDBXYG2+IVh0WyZk5zr+qclBYgdT2yc8kI946ZWQ2QA=
 			</data>
 		</dict>
+		<key>Modules/AEPEventhub.swiftmodule/i386.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MVmHUpnfTRb9lCNG0r7LuNrFFPQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			L8PLsQzKyyJXXXCUhuLuwzyy5eN5xli2UfkpwovfujY=
+			</data>
+		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DWI91VMcoXYwsBxTCyLxW7zkwgI=
+			vVvDB/YK9dlD768A0P3a17uSMhs=
 			</data>
 			<key>hash2</key>
 			<data>
-			iP8exfRzbKtiejcml4oIgXmVBs1p2HR/t6SSgDVX6C8=
+			eoSV/sZUGdCOVn8Wa9nUM4kld5yBxurtGcPTNLPNaAI=
 			</data>
 		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -132,15 +170,26 @@
 			zp7fUNyZ4qhCsY5W4nBuulukoBG/83k8mLyoDvSPYu4=
 			</data>
 		</dict>
+		<key>Modules/AEPEventhub.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6pTo3XcXCSs2rzgi2dp8BlHnC2g=
+			</data>
+			<key>hash2</key>
+			<data>
+			EfTJTv3B7W9rZyU67VUWPDfcRvqF0ys1qq//2ca9OFI=
+			</data>
+		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4i/CS4k5s3cjCx8q0qKWdXVQeDg=
+			2oqTAHORyNT7ZKr+ufc2QovgH/s=
 			</data>
 			<key>hash2</key>
 			<data>
-			0qqrQM0dwemWaxWRoD/wDRKSOA05IusCvF8NlsCYLa0=
+			baWjPz4coMvpy64T4Ik3Aj6jjehe8gbEMFH4uIf4X94=
 			</data>
 		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64.swiftdoc</key>
@@ -154,15 +203,26 @@
 			zp7fUNyZ4qhCsY5W4nBuulukoBG/83k8mLyoDvSPYu4=
 			</data>
 		</dict>
+		<key>Modules/AEPEventhub.swiftmodule/x86_64.swiftinterface</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6pTo3XcXCSs2rzgi2dp8BlHnC2g=
+			</data>
+			<key>hash2</key>
+			<data>
+			EfTJTv3B7W9rZyU67VUWPDfcRvqF0ys1qq//2ca9OFI=
+			</data>
+		</dict>
 		<key>Modules/AEPEventhub.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4i/CS4k5s3cjCx8q0qKWdXVQeDg=
+			2oqTAHORyNT7ZKr+ufc2QovgH/s=
 			</data>
 			<key>hash2</key>
 			<data>
-			0qqrQM0dwemWaxWRoD/wDRKSOA05IusCvF8NlsCYLa0=
+			baWjPz4coMvpy64T4Ik3Aj6jjehe8gbEMFH4uIf4X94=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -1,0 +1,175 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AEPEventhub
+@_exported import AEPEventhub
+import AEPServices
+import Foundation
+import Swift
+import SwiftRulesEngine
+@objc public enum AEPError : Swift.Int, Swift.Error {
+  public typealias RawValue = Swift.Int
+  case unexpected
+  case callbackTimeout
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+  public static var _nsErrorDomain: Swift.String {
+    get
+  }
+}
+public protocol Configuration {
+  static func configureWith(appId: Swift.String)
+  static func configureWith(filePath: Swift.String)
+  static func updateConfigurationWith(configDict: [Swift.String : Any])
+  static func setPrivacy(status: AEPEventhub.PrivacyStatus)
+  static func getPrivacyStatus(completion: @escaping (AEPEventhub.PrivacyStatus) -> ())
+  static func getSdkIdentities(completion: @escaping (Swift.String?, AEPEventhub.AEPError?) -> ())
+}
+public struct Event {
+  public let name: Swift.String
+  public var id: Foundation.UUID {
+    get
+    }
+  public let type: AEPEventhub.EventType
+  public let source: AEPEventhub.EventSource
+  public let data: [Swift.String : Any]?
+  public var timestamp: Foundation.Date {
+    get
+    }
+  public let responseID: Foundation.UUID?
+  public init(name: Swift.String, type: AEPEventhub.EventType, source: AEPEventhub.EventSource, data: [Swift.String : Any]?)
+}
+extension Event : Swift.Decodable, Swift.Encodable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public typealias EventListener = (AEPEventhub.Event) -> Swift.Void
+public typealias EventResponseListener = (AEPEventhub.Event?) -> Swift.Void
+public typealias SharedStateResolver = ([Swift.String : Any]?) -> Swift.Void
+public typealias EventHandlerMapping = (event: AEPEventhub.Event, handler: (AEPEventhub.Event) -> (Swift.Bool))
+public typealias EventPreprocessor = (AEPEventhub.Event) -> AEPEventhub.Event
+final public class EventHub {
+  public static let shared: AEPEventhub.EventHub
+  final public func start()
+  final public func dispatch(event: AEPEventhub.Event)
+  final public func registerExtension(_ type: AEPEventhub.Extension.Type, completion: @escaping (AEPEventhub.EventHubError?) -> Swift.Void)
+  final public func registerResponseListener(triggerEvent: AEPEventhub.Event, timeout: Foundation.TimeInterval, listener: @escaping AEPEventhub.EventResponseListener)
+  final public func createSharedState(extensionName: Swift.String, data: [Swift.String : Any]?, event: AEPEventhub.Event?)
+  final public func createPendingSharedState(extensionName: Swift.String, event: AEPEventhub.Event?) -> AEPEventhub.SharedStateResolver
+  final public func getSharedState(extensionName: Swift.String, event: AEPEventhub.Event?) -> (value: [Swift.String : Any]?, status: AEPEventhub.SharedStateStatus)?
+  @objc deinit
+}
+public enum EventHubError : Swift.Error {
+  case invalidExtensionName
+  case duplicateExtensionName
+  case unknown
+  public static func == (a: AEPEventhub.EventHubError, b: AEPEventhub.EventHubError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+extension EventHubError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum EventSource : Swift.String, Swift.Codable {
+  case none
+  case os
+  case requestContent
+  case requestIdentity
+  case requestProfile
+  case requestReset
+  case responseContent
+  case responseIdentity
+  case responseProfile
+  case sharedState
+  case wildcard
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum EventType : Swift.String, Swift.Codable {
+  case acquisition
+  case analytics
+  case audienceManager
+  case campaign
+  case configuration
+  case custom
+  case hub
+  case identity
+  case lifecycle
+  case location
+  case pii
+  case rulesEngine
+  case signal
+  case system
+  case target
+  case userProfile
+  case places
+  case genericTrack
+  case genericLifecycle
+  case genericIdentity
+  case genericPii
+  case genericData
+  case wildcard
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol Extension {
+  var name: Swift.String { get }
+  var version: Swift.String { get }
+  func onRegistered()
+  func onUnregistered()
+  func readyForEvent(_ event: AEPEventhub.Event) -> Swift.Bool
+  init()
+}
+extension Extension {
+  public func registerListener(type: AEPEventhub.EventType, source: AEPEventhub.EventSource, listener: @escaping AEPEventhub.EventListener)
+  public func registerResponseListener(triggerEvent: AEPEventhub.Event, timeout: Foundation.TimeInterval, listener: @escaping AEPEventhub.EventResponseListener)
+  public func dispatch(event: AEPEventhub.Event)
+  public func createSharedState(data: [Swift.String : Any], event: AEPEventhub.Event?)
+  public func createPendingSharedState(event: AEPEventhub.Event?) -> AEPEventhub.SharedStateResolver
+  public func getSharedState(extensionName: Swift.String, event: AEPEventhub.Event?) -> (value: [Swift.String : Any]?, status: AEPEventhub.SharedStateStatus)?
+  public func readyForEvent(_ event: AEPEventhub.Event) -> Swift.Bool
+  public func startEvents()
+  public func stopEvents()
+}
+@objc public enum PrivacyStatus : Swift.Int, Swift.RawRepresentable, Swift.Codable {
+  case unknown
+  case optedIn
+  case optedOut
+  public typealias RawValue = Swift.String
+  public var rawValue: AEPEventhub.PrivacyStatus.RawValue {
+    get
+  }
+  public init?(rawValue: AEPEventhub.PrivacyStatus.RawValue)
+}
+public enum SharedStateStatus {
+  case set, pending, none
+  public static func == (a: AEPEventhub.SharedStateStatus, b: AEPEventhub.SharedStateStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+extension AEPEventhub.AEPError : Swift.Equatable {}
+extension AEPEventhub.AEPError : Swift.Hashable {}
+extension AEPEventhub.AEPError : Swift.RawRepresentable {}
+extension AEPEventhub.EventHubError : Swift.Equatable {}
+extension AEPEventhub.EventHubError : Swift.Hashable {}
+extension AEPEventhub.EventSource : Swift.Hashable {}
+extension AEPEventhub.EventSource : Swift.RawRepresentable {}
+extension AEPEventhub.EventType : Swift.Hashable {}
+extension AEPEventhub.EventType : Swift.RawRepresentable {}
+extension AEPEventhub.PrivacyStatus : Swift.Equatable {}
+extension AEPEventhub.PrivacyStatus : Swift.Hashable {}
+extension AEPEventhub.SharedStateStatus : Swift.Equatable {}
+extension AEPEventhub.SharedStateStatus : Swift.Hashable {}

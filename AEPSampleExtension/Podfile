@@ -2,8 +2,8 @@ platform :ios, '10.0'
 
 use_frameworks!
 target 'AEPSampleExtension' do
-    pod 'AEPServices', :git => 'git@github.com:shalehaha/aepsdk-core-ios.git', :branch => 'cocoapod'
-    pod 'AEPEventhub', :git => 'git@github.com:shalehaha/aepsdk-core-ios.git', :branch => 'cocoapod'
+    pod 'AEPServices', :git => 'git@github.com:shalehaha/aepsdk-core-ios.git', :branch => 'make'
+    pod 'AEPEventHub', :git => 'git@github.com:shalehaha/aepsdk-core-ios.git', :branch => 'make'
     pod 'SwiftRulesEngine', :git => 'git@github.com:shalehaha/aepsdk-rulesengine-ios.git', :branch => 'dev'
 end
 

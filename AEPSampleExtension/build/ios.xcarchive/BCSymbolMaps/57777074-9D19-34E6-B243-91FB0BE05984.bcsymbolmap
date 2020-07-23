@@ -2,9 +2,11 @@ BCSymbolMap Version: 2.0
 _$s18AEPSampleExtensionAAV4nameSSvM.resume.0
 _$s18AEPSampleExtensionAAVIetMl_TC
 _$s18AEPSampleExtensionAAV7versionSSvM.resume.0
+_$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTc
+_$s18AEPSampleExtensionAAVAB11AEPEventhub0B0AAWl
 _$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tF
-_$s18AEPSampleExtensionAAVWOc
-_$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTA
+_$ss5print_9separator10terminatoryypd_S2StFfA0_
+_$ss5print_9separator10terminatoryypd_S2StFfA1_
 _$s18AEPSampleExtensionAAV11AEPEventhub0B0AacDP4nameSSvgTW
 _$s18AEPSampleExtensionAAV11AEPEventhub0B0AacDP7versionSSvgTW
 _$s18AEPSampleExtensionAAV11AEPEventhub0B0AacDP12onRegisteredyyFTW
@@ -19,23 +21,26 @@ ___swift_memcpy32_8
 _$s18AEPSampleExtensionAAVwta
 _$s18AEPSampleExtensionAAVwet
 _$s18AEPSampleExtensionAAVwst
-_$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTA.4
-_symbolic 18AEPSampleExtensionAAV
+_$s18AEPSampleExtensionAAVWOc
+_$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTA
+_$s18AEPSampleExtensionAAVAB11AEPEventhub0B0AAWL
 _$s18AEPSampleExtensionAAVWV
 _$s18AEPSampleExtensionMXM
 _$s18AEPSampleExtensionAAVMf
 _symbolic _____ 18AEPSampleExtensionAAV
 _symbolic SS
 _$s18AEPSampleExtensionAAVMF
-_$ss23_ContiguousArrayStorageCyypGML
+_symbolic 18AEPSampleExtensionAAV
 ___swift_reflection_version
 Apple clang version 11.0.0 (clang-1100.0.33.15)
 <swift-imported-modules>
 /Users/jgeng/work/v5/aepsdk-sampleextension-ios/AEPSampleExtension
 Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
 /Users/jgeng/work/v5/aepsdk-sampleextension-ios/AEPSampleExtension/AEPSampleExtension/AEPSampleExtension.swift
-$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTA.4
+$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTA
 <compiler-generated>
+objectdestroy
+$s18AEPSampleExtensionAAVWOc
 $s18AEPSampleExtensionAAVMa
 $s18AEPSampleExtensionAAVwst
 $s18AEPSampleExtensionAAVwet
@@ -49,18 +54,11 @@ init
 readyForEvent
 onUnregistered
 onRegistered
-handleAnalytics
 version.get
 name.get
-$s18AEPSampleExtensionAAV15handleAnalytics5eventy11AEPEventhub5EventV_tFTA
-objectdestroy
-$s18AEPSampleExtensionAAVWOc
-_allocateUninitializedArray
-$sSa13_adoptStorage_5countSayxG_SpyxGts016_ContiguousArrayB0CyxGn_SitFZyp_Tg5
-$ss22_ContiguousArrayBufferV19firstElementAddressSpyxGvgyp_Tg5
-$ss22_ContiguousArrayBufferV5count7storageAByxGSi_s01_aB7StorageCyxGtcfCyp_Tg5
-$ss22_ContiguousArrayBufferV18_initStorageHeader5count8capacityySi_SitFyp_Tg5
-$ss23_ContiguousArrayStorageCyypGMa
+print
+handleAnalytics
+$s18AEPSampleExtensionAAVAB11AEPEventhub0B0AAWl
 version.modify
 version.set
 name.modify

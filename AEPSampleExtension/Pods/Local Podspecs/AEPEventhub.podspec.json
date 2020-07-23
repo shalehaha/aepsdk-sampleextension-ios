@@ -16,6 +16,9 @@
   },
   "source_files": "AEPEventhub/Sources/**/*.swift",
   "swift_versions": "5.0",
+  "pod_target_xcconfig": {
+    "BUILD_LIBRARY_FOR_DISTRIBUTION": "YES"
+  },
   "dependencies": {
     "AEPServices": [
 

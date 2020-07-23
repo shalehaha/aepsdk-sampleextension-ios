@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AEPEventhub
+import AEPEventHub
 import AEPServices
 
 public struct AEPSampleExtension:Extension{

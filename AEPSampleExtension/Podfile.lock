@@ -23,18 +23,18 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AEPEventhub:
-    :commit: d43a76e538033482e4ace16e010ba55681fd5137
+    :commit: 3c1ab84903f3ffd4a996dff482a7ed0efe945961
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   AEPServices:
-    :commit: d43a76e538033482e4ace16e010ba55681fd5137
+    :commit: 3c1ab84903f3ffd4a996dff482a7ed0efe945961
     :git: "git@github.com:shalehaha/aepsdk-core-ios.git"
   SwiftRulesEngine:
     :commit: 467fcc0e046971ce2ed1ca379e50fcc327c8d3a8
     :git: "git@github.com:shalehaha/aepsdk-rulesengine-ios.git"
 
 SPEC CHECKSUMS:
-  AEPEventhub: 16ca79c07a2eb329bc55b90f73fb60a8e1df5577
-  AEPServices: 9e5dabf80229214e8d2ad00d81436fcb0175a41b
+  AEPEventhub: 8eaeada0c25667e9d46c6d982feeece16e66be58
+  AEPServices: d6c2385e5a7253cca195360d54051dc73aa31edb
   SwiftRulesEngine: 61ffafd22c9f1d2e09b344fcad15069e362c9ac1
 
 PODFILE CHECKSUM: 2a908b89df4ffd7d4425582a0503980002ab6964

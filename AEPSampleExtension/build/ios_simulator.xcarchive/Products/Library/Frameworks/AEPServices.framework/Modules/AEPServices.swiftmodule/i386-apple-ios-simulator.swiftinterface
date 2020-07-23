@@ -1,0 +1,316 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name AEPServices
+@_exported import AEPServices
+import CoreTelephony
+import Foundation
+import SQLite3
+import Swift
+import UIKit
+public class AEPDataQueueService : AEPServices.DataQueueService {
+  public static let shared: AEPServices.DataQueueService
+  public func getDataQueue(label databaseName: Swift.String) -> AEPServices.DataQueue?
+  @objc deinit
+}
+public enum NetworkServiceError : Swift.Error {
+  case invalidUrl
+  public static func == (a: AEPServices.NetworkServiceError, b: AEPServices.NetworkServiceError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public class AEPServiceProvider {
+  public static let shared: AEPServices.AEPServiceProvider
+  public var systemInfoService: AEPServices.SystemInfoService {
+    get
+    set
+  }
+  public var namedKeyValueService: AEPServices.NamedKeyValueService {
+    get
+    set
+  }
+  public var networkService: AEPServices.NetworkService {
+    get
+    set
+  }
+  public var dataQueueService: AEPServices.DataQueueService {
+    get
+  }
+  public var cacheService: AEPServices.CacheService {
+    get
+    set
+  }
+  @objc deinit
+}
+public struct AnyCodable : Swift.Codable {
+  public let value: Any?
+  public init(_ value: Any?)
+  public static func from(dictionary: [Swift.String : Any]?) -> [Swift.String : AEPServices.AnyCodable]?
+  public static func toAnyDictionary(dictionary: [Swift.String : AEPServices.AnyCodable]?) -> [Swift.String : Any]?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension AnyCodable : Swift.ExpressibleByStringLiteral {
+  public init(stringLiteral value: Swift.String)
+  public typealias StringLiteralType = Swift.String
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
+}
+extension AnyCodable : Swift.ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift.Bool)
+  public typealias BooleanLiteralType = Swift.Bool
+}
+extension AnyCodable : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.Int)
+  public init(longLiteral value: Swift.Int64)
+  public typealias IntegerLiteralType = Swift.Int
+}
+extension AnyCodable : Swift.ExpressibleByFloatLiteral {
+  public init(floatLiteral value: Swift.Double)
+  public typealias FloatLiteralType = Swift.Double
+}
+extension AnyCodable : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: Any...)
+  public typealias ArrayLiteralElement = Any
+}
+extension AnyCodable : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Any)...)
+  public typealias Key = Swift.String
+  public typealias Value = Any
+}
+extension AnyCodable : Swift.ExpressibleByNilLiteral {
+  public init(nilLiteral: ())
+}
+extension AnyCodable : Swift.Equatable {
+  public static func == (lhs: AEPServices.AnyCodable, rhs: AEPServices.AnyCodable) -> Swift.Bool
+}
+public class Cache {
+  public func set(key: Swift.String, entry: AEPServices.CacheEntry) throws
+  public func get(key: Swift.String) -> AEPServices.CacheEntry?
+  public func remove(key: Swift.String) throws
+  @objc deinit
+}
+public struct CacheEntry : Swift.Equatable {
+  public static func == (a: AEPServices.CacheEntry, b: AEPServices.CacheEntry) -> Swift.Bool
+}
+public enum CacheExpiry : Swift.Equatable {
+  case never
+  case seconds(Foundation.TimeInterval)
+  case date(Foundation.Date)
+  public var date: Foundation.Date {
+    get
+  }
+  public var isExpired: Swift.Bool {
+    get
+  }
+  public static func == (a: AEPServices.CacheExpiry, b: AEPServices.CacheExpiry) -> Swift.Bool
+}
+public protocol CacheService {
+  func set(cacheName: Swift.String, key: Swift.String, entry: AEPServices.CacheEntry) throws
+  func get(cacheName: Swift.String, key: Swift.String) -> AEPServices.CacheEntry?
+  func remove(cacheName: Swift.String, key: Swift.String) throws
+}
+@objc public class DataEntity : ObjectiveC.NSObject {
+  public init(uniqueIdentifier: Swift.String, timestamp: Foundation.Date, data: Foundation.Data?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol DataQueue {
+  @objc func add(dataEntity: AEPServices.DataEntity) -> Swift.Bool
+  @objc func peek() -> AEPServices.DataEntity?
+  @objc func remove() -> Swift.Bool
+  @objc func clear() -> Swift.Bool
+}
+public protocol DataQueueService {
+  static var shared: AEPServices.DataQueueService { get }
+  func getDataQueue(label: Swift.String) -> AEPServices.DataQueue?
+}
+public class DiskCacheService : AEPServices.CacheService {
+  public func set(cacheName: Swift.String, key: Swift.String, entry: AEPServices.CacheEntry) throws
+  public func get(cacheName: Swift.String, key: Swift.String) -> AEPServices.CacheEntry?
+  public func remove(cacheName: Swift.String, key: Swift.String) throws
+  @objc deinit
+}
+public struct HttpConnection {
+  public let data: Foundation.Data?
+  public let response: Foundation.HTTPURLResponse?
+  public let error: Swift.Error?
+  public init(data: Foundation.Data?, response: Foundation.HTTPURLResponse?, error: Swift.Error?)
+}
+extension HttpConnection {
+  public var responseString: Swift.String? {
+    get
+  }
+  public var responseCode: Swift.Int? {
+    get
+  }
+  public var responseMessage: Swift.String? {
+    get
+  }
+  public func responseHttpHeader(forKey: Swift.String) -> Swift.String?
+}
+@objc public enum HttpMethod : Swift.Int {
+  case get
+  case post
+  public func toString() -> Swift.String
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol NamedKeyValueService {
+  func set(collectionName: Swift.String, key: Swift.String, value: Any?)
+  func get(collectionName: Swift.String, key: Swift.String) -> Any?
+  func remove(collectionName: Swift.String, key: Swift.String)
+  func removeAll(collectionName: Swift.String)
+}
+public class NamedKeyValueStore {
+  public init(name: Swift.String)
+  public subscript(key: Swift.String) -> Swift.Int? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: Swift.Int?)
+  public func getInt(key: Swift.String, fallback: Swift.Int? = nil) -> Swift.Int?
+  public subscript(key: Swift.String) -> Swift.String? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: Swift.String?)
+  public func getString(key: Swift.String, fallback: Swift.String? = nil) -> Swift.String?
+  public subscript(key: Swift.String) -> Swift.Double? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: Swift.Double?)
+  public func getDouble(key: Swift.String, fallback: Swift.Double? = nil) -> Swift.Double?
+  public subscript(key: Swift.String) -> Swift.Int64? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: Swift.Int64?)
+  public func getLong(key: Swift.String, fallback: Swift.Int64? = nil) -> Swift.Int64?
+  public subscript(key: Swift.String) -> Swift.Float? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: Swift.Float?)
+  public func getFloat(key: Swift.String, fallback: Swift.Float? = nil) -> Swift.Float?
+  public func set(key: Swift.String, value: Swift.Bool?)
+  public subscript(key: Swift.String) -> Swift.Bool? {
+    get
+    set
+  }
+  public func getBool(key: Swift.String, fallback: Swift.Bool? = nil) -> Swift.Bool?
+  public subscript(key: Swift.String) -> [Any]? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: [Any]?)
+  public func getArray(key: Swift.String, fallback: [Any]? = nil) -> [Any]?
+  public subscript(key: Swift.String) -> [Swift.AnyHashable : Any]? {
+    get
+    set
+  }
+  public func set(key: Swift.String, value: [Swift.AnyHashable : Any]?)
+  public func getDictionary(key: Swift.String, fallback: [Swift.AnyHashable : Any]? = nil) -> [Swift.AnyHashable : Any]?
+  public subscript<T>(key: Swift.String) -> T? where T : Swift.Decodable, T : Swift.Encodable {
+    get
+    set
+  }
+  public func setObject<T>(key: Swift.String, value: T) where T : Swift.Decodable, T : Swift.Encodable
+  public func getObject<T>(key: Swift.String, fallback: T? = nil) -> T? where T : Swift.Decodable, T : Swift.Encodable
+  public func contains(key: Swift.String) -> Swift.Bool
+  public func remove(key: Swift.String)
+  public func removeAll()
+  @objc deinit
+}
+public struct NetworkRequest {
+  public let url: Foundation.URL
+  public let httpMethod: AEPServices.HttpMethod
+  public let connectPayload: Swift.String
+  public let httpHeaders: [Swift.String : Swift.String]
+  public let connectTimeout: Foundation.TimeInterval
+  public let readTimeout: Foundation.TimeInterval
+  public init(url: Foundation.URL, httpMethod: AEPServices.HttpMethod = HttpMethod.get, connectPayload: Swift.String = "", httpHeaders: [Swift.String : Swift.String] = [:], connectTimeout: Foundation.TimeInterval = 5, readTimeout: Foundation.TimeInterval = 5)
+}
+public protocol NetworkService {
+  func connectAsync(networkRequest: AEPServices.NetworkRequest, completionHandler: ((AEPServices.HttpConnection) -> Swift.Void)?)
+}
+public struct NetworkServiceConstants {
+  public struct Headers {
+    public static let IF_MODIFIED_SINCE_HEADER: Swift.String
+    public static let IF_NONE_MATCH: Swift.String
+    public static let LAST_MODIFIED: Swift.String
+    public static let ETAG: Swift.String
+  }
+}
+public protocol SystemInfoService {
+  func getProperty(for key: Swift.String) -> Swift.String?
+  func getAsset(fileName: Swift.String, fileType: Swift.String) -> Swift.String?
+  func getAsset(fileName: Swift.String, fileType: Swift.String) -> [Swift.UInt8]?
+  func getDeviceName() -> Swift.String
+  func getMobileCarrierName() -> Swift.String?
+  func getRunMode() -> Swift.String
+  func getApplicationName() -> Swift.String?
+  func getApplicationBuildNumber() -> Swift.String?
+  func getApplicationVersionNumber() -> Swift.String?
+  func getOperatingSystemName() -> Swift.String
+  func getDisplayInformation() -> (width: Swift.Int, height: Swift.Int)
+  func getDefaultUserAgent() -> Swift.String
+  func getActiveLocaleName() -> Swift.String
+}
+final public class ThreadSafeArray<T> {
+  public init(identifier: Swift.String = "com.adobe.threadsafearray.queue")
+  final public func append(_ newElement: T)
+  final public func clear()
+  final public var isEmpty: Swift.Bool {
+    get
+  }
+  final public var count: Swift.Int {
+    get
+  }
+  final public var shallowCopy: [T] {
+    get
+  }
+  final public subscript(index: Swift.Int) -> T {
+    get
+    set
+  }
+  @objc deinit
+}
+extension ThreadSafeArray where T : Swift.Equatable {
+  final public func filterRemove(_ isIncluded: (T) throws -> Swift.Bool) -> [T]
+}
+final public class ThreadSafeDictionary<K, V> where K : Swift.Hashable {
+  public typealias Element = Swift.Dictionary<K, V>.Element
+  @usableFromInline
+  final internal var dictionary: [K : V]
+  @usableFromInline
+  final internal let queue: Dispatch.DispatchQueue
+  public init(identifier: Swift.String = "com.adobe.threadsafedictionary.queue")
+  final public var count: Swift.Int {
+    get
+  }
+  final public var shallowCopy: [K : V] {
+    get
+  }
+  final public subscript(key: K) -> V? {
+    get
+    set
+  }
+  @inlinable final public func first(where predicate: (AEPServices.ThreadSafeDictionary<K, V>.Element) throws -> Swift.Bool) rethrows -> AEPServices.ThreadSafeDictionary<K, V>.Element? {
+        return queue.sync { return try? self.dictionary.first(where: predicate) }
+    }
+  @objc deinit
+}
+public struct URLEncoder {
+  public static func encode(value: Swift.String) -> Swift.String
+  public static func decode(value: Swift.String) -> Swift.String
+}
+extension AEPServices.NetworkServiceError : Swift.Equatable {}
+extension AEPServices.NetworkServiceError : Swift.Hashable {}
+extension AEPServices.HttpMethod : Swift.Hashable {}
+extension AEPServices.HttpMethod : Swift.RawRepresentable {}
