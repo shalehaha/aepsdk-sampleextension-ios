@@ -1,8 +1,8 @@
 {
-  "name": "AEPEventhub",
+  "name": "AEPEventHub",
   "version": "0.0.1",
-  "summary": "AEPEventhub",
-  "description": "AEPEventhub",
+  "summary": "AEPEventHub",
+  "description": "AEPEventHub",
   "homepage": "https://github.com/adobe/aepsdk-core-ios",
   "license": "Apache V2",
   "authors": "Adobe Experience Platform SDK Team",
@@ -14,7 +14,7 @@
   "platforms": {
     "ios": "10.0"
   },
-  "source_files": "AEPEventhub/Sources/**/*.swift",
+  "source_files": "AEPEventHub/Sources/**/*.swift",
   "swift_versions": "5.0",
   "pod_target_xcconfig": {
     "BUILD_LIBRARY_FOR_DISTRIBUTION": "YES"

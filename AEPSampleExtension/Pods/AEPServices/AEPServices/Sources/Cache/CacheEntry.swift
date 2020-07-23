@@ -15,12 +15,18 @@ import Foundation
 /// Represents a entry in the cache
 public struct CacheEntry: Equatable {
     
+    public init(data: Data, expiry: CacheExpiry, metadata: [String: String]?) {
+        self.data = data
+        self.expiry = expiry
+        self.metadata = metadata
+    }
+    
     /// Data of the file for this entry
-    let data: Data
+    public let data: Data
     
     /// Expiry date of this cache entry
-    let expiry: CacheExpiry
+    public let expiry: CacheExpiry
     
     /// Optional metadata associated with the cache entry
-    let metadata: [String: String]?
+    public let metadata: [String: String]?
 }

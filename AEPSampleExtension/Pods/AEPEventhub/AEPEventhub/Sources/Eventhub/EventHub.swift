@@ -27,11 +27,11 @@ final public class EventHub {
     private let responseEventListeners = ThreadSafeArray<EventListenerContainer>(identifier: "com.adobe.eventhub.response.queue")
     private var eventNumberCounter = AtomicCounter()
     private let eventQueue = OperationOrderer<Event>("EventHub")
+    private var preprocessors = ThreadSafeArray<EventPreprocessor>(identifier: "com.adobe.eventhub.preprocessors.queue")
 
     #if DEBUG
     public internal(set) static var shared = EventHub()
     #else
-    //TODO: fix public
     public static let shared = EventHub()
     #endif
 
@@ -39,21 +39,22 @@ final public class EventHub {
     // MARK: Public API
 
     init() {
+        // setup a fake extension container for `EventHub` so we can shared and retrieve state
+        registerExtension(EventHubPlaceholderExtension.self, completion: {_ in })
+
         // Setup eventQueue handler for the main OperationOrderer
         eventQueue.setHandler { (event) -> Bool in
-            let processedEvent = self.registeredExtensions.shallowCopy.values
-                .filter { $0.preprocessor != nil}
-                .reduce(event) { currentEvent, extensionContainer in
-                    extensionContainer.preprocessor?(currentEvent) ?? currentEvent
-            }
             
+            let processedEvent = self.preprocessors.shallowCopy.reduce(event) { event,  preprocessor in
+                preprocessor(event)
+            }            
             
             // Handle response event listeners first
             if let responseID = processedEvent.responseID {
                 _ = self.responseEventListeners.filterRemove { (eventListenerContainer: EventListenerContainer) -> Bool in
                     guard eventListenerContainer.triggerEventId == responseID else { return false }
                     eventListenerContainer.timeoutTask?.cancel()
-                    eventListenerContainer.listener(event)
+                    eventListenerContainer.listener(processedEvent)
                     return true
                 }
             }
@@ -62,7 +63,7 @@ final public class EventHub {
             self.registeredExtensions.shallowCopy.values.forEach {
                 $0.eventOrderer.add(processedEvent)
             }
-            
+
             return true
         }
     }
@@ -71,6 +72,7 @@ final public class EventHub {
     public func start() {
         eventHubQueue.async {
             self.eventQueue.start()
+            self.shareEventHubSharedState() // share state of all registered extensions
         }
     }
 
@@ -98,15 +100,14 @@ final public class EventHub {
                 completion(.duplicateExtensionName)
                 return
             }
-            
+
             // Init the extension on a dedicated queue
             let extensionQueue = DispatchQueue(label: "com.adobe.eventhub.extension.\(type.typeName)")
-            let extensionContainer = ExtensionContainer(type, extensionQueue)
+            let extensionContainer = ExtensionContainer(type, extensionQueue, completion: completion)
             self.registeredExtensions[type.typeName] = extensionContainer
-            completion(nil)
         }
     }
-    
+
     /// Registers an `EventListener` which will be invoked when the response `Event` to `triggerEvent` is dispatched
     /// - Parameters:
     ///   - triggerEvent: An `Event` which will trigger a response `Event`
@@ -144,7 +145,7 @@ final public class EventHub {
     /// - Returns: A `SharedStateResolver` which is invoked to set pending the `SharedState` versioned at `event`
     public func createPendingSharedState(extensionName: String, event: Event?) -> SharedStateResolver {
         var pendingVersion: Int? = nil
-        
+
         if let (sharedState, version) = self.versionSharedState(extensionName: extensionName, event: event) {
             pendingVersion = version
             sharedState.addPending(version: version)
@@ -173,18 +174,22 @@ final public class EventHub {
 
         return sharedState.resolve(version: version)
     }
-    
-    // MARK: Internal
-    
+
     /// Retrieves the `ExtensionContainer` wrapper for the given extension type
     /// - Parameter type: The `Extension` class to find the `ExtensionContainer` for
     /// - Returns: The `ExtensionContainer` instance if the `Extension` type was found, nil otherwise
     internal func getExtensionContainer(_ type: Extension.Type) -> ExtensionContainer? {
         return registeredExtensions[type.typeName]
     }
+    
+    /// Register a event preprocessor
+    /// - Parameter preprocessor: The `EventPreprocessor`
+    internal func registerPreprocessor(_ preprocessor: @escaping EventPreprocessor){
+        preprocessors.append(preprocessor)
+    }
 
     // MARK: Private
-    
+
     private func versionSharedState(extensionName: String, event: Event?) -> (SharedState, Int)? {
         guard let extensionContainer = registeredExtensions.first(where: {$1.sharedStateName == extensionName})?.value else {
             // print error - extension not registered with event hub
@@ -213,6 +218,27 @@ final public class EventHub {
     private func createSharedStateEvent(extensionName: String) -> Event {
         return Event(name: EventHubConstants.STATE_CHANGE, type: .hub, source: .sharedState,
                      data: [EventHubConstants.EventDataKeys.Configuration.EVENT_STATE_OWNER: extensionName])
+    }
+    
+    /// Shares a shared state for the `EventHub` with data containing all the registered extensions
+    private func shareEventHubSharedState() {
+        var extensionsInfo = [String: [String: Any]]()
+        for (_, val) in registeredExtensions.shallowCopy
+            where val.sharedStateName != EventHubConstants.NAME {
+
+            if let exten = val.exten {
+                extensionsInfo[exten.friendlyName] = [EventHubConstants.EventDataKeys.VERSION: exten.version]
+                if let metadata = exten.metadata, !metadata.isEmpty {
+                    extensionsInfo[exten.friendlyName] = [EventHubConstants.EventDataKeys.VERSION: exten.version,
+                                                          EventHubConstants.EventDataKeys.METADATA: metadata]
+                }
+            }
+        }
+
+        // TODO: Determine which version of Core to use in the top level version field
+        let data: [String: Any] = [EventHubConstants.EventDataKeys.VERSION: ConfigurationConstants.EXTENSION_VERSION,
+                                   EventHubConstants.EventDataKeys.EXTENSIONS: extensionsInfo]
+        createSharedState(extensionName: EventHubConstants.NAME, data: data, event: nil)
     }
 
 }

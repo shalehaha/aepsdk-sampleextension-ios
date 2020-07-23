@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double AEPEventhubVersionNumber;
-FOUNDATION_EXPORT const unsigned char AEPEventhubVersionString[];
+FOUNDATION_EXPORT double AEPEventHubVersionNumber;
+FOUNDATION_EXPORT const unsigned char AEPEventHubVersionString[];
 

@@ -17,9 +17,18 @@ public protocol Extension {
 
     /// Name of the extension
     var name: String { get }
+    
+    /// A friendly human readable name of the extension
+    var friendlyName: String { get }
 
     /// Version of the extension
     var version: String { get }
+    
+    /// Optional metadata to be provided to the `EventHub`
+    var metadata: [String: String]? { get }
+    
+    /// Provides the methods can be used by extension
+    var runtime: ExtensionRuntime {  get}
 
     /// Invoked when the extension has been registered by the `EventHub`
     func onRegistered()
@@ -35,18 +44,11 @@ public protocol Extension {
     func readyForEvent(_ event: Event) -> Bool
 
     // An `Extension` must support parameterless initializer
-    init()
+    init(runtime:ExtensionRuntime)
 }
 
 /// Contains methods for developers to interact with in their own extensions
 public extension Extension {
-    
-    /// Registers the `Extension` with the `EventHub`
-    //@available(*, deprecated, message: "Use AEPCore.registerExtensions(extensions:) instead")
-    //TODO: move to AEPCore
-//    static func registerExtension() {
-//        AEPCore.pendingExtensions.append(Self.self)
-//    }
     
     /// Registers a `EventListener` with the `EventHub`
     /// - Parameters:
@@ -54,22 +56,13 @@ public extension Extension {
     ///   - source: `EventSource` to be listened for
     ///   - listener: The `EventListener` to be invoked when `EventHub` dispatches an `Event` with matching `type` and `source`
     func registerListener(type: EventType, source: EventSource, listener: @escaping EventListener) {
-        getExtensionContainer()?.registerListener(type: type, source: source, listener: listener)
-    }
-
-    /// Registers an `EventListener` with the `EventHub` that is invoked when `triggerEvent`'s response event is dispatched
-    /// - Parameters:
-    ///   - triggerEvent: An event which will trigger a response event
-    ///   - timeout A timeout in seconds, if the response listener is not invoked within the timeout, then the `EventHub` invokes the response listener with a nil `Event`
-    ///   - listener: The `EventListener` to be invoked when `EventHub` dispatches the response event to `triggerEvent`
-    func registerResponseListener(triggerEvent: Event, timeout: TimeInterval, listener: @escaping EventResponseListener) {
-        getEventHub().registerResponseListener(triggerEvent: triggerEvent, timeout: timeout, listener: listener)
+        runtime.registerListener(type: type, source: source, listener: listener)
     }
     
     /// Dispatches an `Event` to the `EventHub`
     /// - Parameter event: An `Event` to be dispatched to the `EventHub`
     func dispatch(event: Event) {
-        getEventHub().dispatch(event: event)
+        runtime.dispatch(event: event)
     }
 
     // MARK: Shared State
@@ -79,14 +72,14 @@ public extension Extension {
     ///   - data: Data for the `SharedState`
     ///   - event: An event for the `SharedState` to be versioned at, if nil the shared state is versioned at the latest
     func createSharedState(data: [String: Any], event: Event?) {
-        getEventHub().createSharedState(extensionName: name, data: data, event: event)
+        runtime.createSharedState(data: data, event: event)
     }
 
 
     /// Creates a pending `SharedState` versioned at `event`
     /// - Parameter event: The event for the pending `SharedState` to be created at
     func createPendingSharedState(event: Event?) -> SharedStateResolver {
-        return getEventHub().createPendingSharedState(extensionName: name, event: event)
+        return runtime.createPendingSharedState(event: event)
     }
 
     /// Gets the `SharedState` data for a specified extension
@@ -94,7 +87,7 @@ public extension Extension {
     ///   - extensionName: An extension name whose `SharedState` will be returned
     ///   - event: If not nil, will retrieve the `SharedState` that corresponds with the event's version, if nil will return the latest `SharedState`
     func getSharedState(extensionName: String, event: Event?) -> (value: [String: Any]?, status: SharedStateStatus)? {
-        return getEventHub().getSharedState(extensionName: extensionName, event: event)
+        return runtime.getSharedState(extensionName: extensionName, event: event)
     }
     
     /// Called before each `Event` is processed by any `ExtensionListener` owned by this `Extension`
@@ -108,27 +101,16 @@ public extension Extension {
     
     /// Starts the `Event` queue for this extension
     func startEvents() {
-        getExtensionContainer()?.eventOrderer.start()
+        runtime.startEvents()
     }
     
     /// Stops the `Event` queue for this extension
     func stopEvents() {
-        getExtensionContainer()?.eventOrderer.stop()
+        runtime.stopEvents()
     }
     
-    internal func registerEventPreprocessor(preprocessor: @escaping EventPreprocessor){
-        getExtensionContainer()?.preprocessor = preprocessor
-    
-    }
-}
-
-/// Contains methods that we don't want developers accessing
-private extension Extension {
-    private func getEventHub() -> EventHub {
-        return EventHub.shared
+    internal func registerPreprocessor(_ preprocessor: @escaping EventPreprocessor){
+        EventHub.shared.registerPreprocessor(preprocessor)
     }
     
-    private func getExtensionContainer() -> ExtensionContainer? {
-        return getEventHub().getExtensionContainer(Self.self)
-    }
 }

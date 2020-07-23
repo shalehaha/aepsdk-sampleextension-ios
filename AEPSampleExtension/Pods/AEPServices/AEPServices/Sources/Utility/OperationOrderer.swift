@@ -15,7 +15,7 @@ import Foundation
 /// OperationOrderer implements a startable/stoppable queue of items and an associated handler function.
 ///
 /// This class maintains it's own internal GCD queueing mechanisms, so all available functions are thread safe.
-class OperationOrderer<T> {
+public class OperationOrderer<T> {
     /// Used to coordinate processing of item queue.
     private let source: DispatchSourceUserDataOr
     
@@ -42,7 +42,7 @@ class OperationOrderer<T> {
     /// - Parameters:
     ///     - tag: Optional string identifier for the internal queue, useful for debugging purposes.
     /// - Returns: A new `OperationOrderer` in a stopped state.
-    init(_ tag: String = "anonymous") {
+    public init(_ tag: String = "anonymous") {
         self.queue = DispatchQueue(label: "com.adobe.OperationOrderer(\(tag))")
         self.source = DispatchSource.makeUserDataOrSource(queue: queue)
         source.setEventHandler(handler: drain)
@@ -52,7 +52,7 @@ class OperationOrderer<T> {
     /// Adds an item of type `T` to the `queue`.
     ///
     /// - Parameter item: Item of type `T` to add to the queue.
-    func add(_ item: T) {
+    public func add(_ item: T) {
         async {
             self.array.append(item)
             self.triggerSourceIfNeeded()
@@ -71,7 +71,7 @@ class OperationOrderer<T> {
     /// - Note: If `handler` returns `true`, the handled item is removed from the queue and processing continues.
     ///         If `handler` returns `false`, the handled item is *not* removed from the queue, and processing is paused
     ///         until another item is added or until the `start` function is called.
-    func setHandler(_ handler: @escaping (T) -> Bool) {
+    public func setHandler(_ handler: @escaping (T) -> Bool) {
         async {
             if (self.active) {
                 self.drain()
@@ -82,7 +82,7 @@ class OperationOrderer<T> {
     }
     
     /// Puts queue in active state.
-    func start() {
+    public func start() {
         async {
             self.active = true
         }
@@ -90,7 +90,7 @@ class OperationOrderer<T> {
     
     /// Puts queue in active state after a time interval
     /// - Parameter after: seconds to wait before starting the queue
-    func start(after: TimeInterval) {
+    public func start(after: TimeInterval) {
         queue.asyncAfter(deadline: .now() + after) {
             self.start()
         }
@@ -98,7 +98,7 @@ class OperationOrderer<T> {
     
     /// Puts queue in inactive state.
     /// - Note: This is not an immediate stop, already queued items may continue to be handled.
-    func stop() {
+    public func stop() {
         async {
             self.active = false
         }

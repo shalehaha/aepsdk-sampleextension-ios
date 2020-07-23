@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-@interface PodsDummy_AEPEventhub : NSObject
+@interface PodsDummy_AEPEventHub : NSObject
 @end
-@implementation PodsDummy_AEPEventhub
+@implementation PodsDummy_AEPEventHub
 @end

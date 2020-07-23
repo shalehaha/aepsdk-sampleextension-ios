@@ -10,11 +10,22 @@ governing permissions and limitations under the License.
 */
 
 import Foundation
+@_implementationOnly import SwiftRulesEngine
 
-final class AtomicCounter {
-    private var count: Int32 = 0
-
-    public func incrementAndGet() -> Int {
-        return Int(OSAtomicIncrement32(&count))
+struct LaunchRulesEngine{
+    let rulesEngine: RulesEngine<LaunchRule>
+    
+    init(){
+        let evaluator = ConditionEvaluator.init(options: .defaultOptions)
+        rulesEngine = RulesEngine(evaluator: evaluator)
     }
+    
+    func loadRules(from url:URL){
+        
+    }
+    
+    func process(event: Event) -> Event{
+        return event
+    }
+    
 }

@@ -13,6 +13,7 @@ import Foundation
 
 struct ConfigurationConstants {
     static let EXTENSION_NAME = "com.adobe.module.configuration"
+    static let FRIENDLY_NAME = "Configuration"
     static let EXTENSION_VERSION = "0.0.1"
     static let DATA_STORE_NAME = EXTENSION_NAME
 
@@ -33,9 +34,9 @@ struct ConfigurationConstants {
         static let PERSISTED_APPID = "config.appID"
         static let IS_INTERNAL_EVENT = "config.isinternalevent"
         static let CONFIG_CACHE_PREFIX = "cached.config."
-        static let ALL_IDENTIFIERS = "config.allidentifiers"
         static let BUILD_ENVIRONMENT = "build.environment"
         static let EXPERIENCE_CLOUD_ORGID = "experienceCloud.org"
+        static let EXPERIENCE_CLOUD_SERVER = "experienceCloud.server"
     }
 
     struct Privacy {
@@ -44,3 +45,17 @@ struct ConfigurationConstants {
         static let OPT_IN = "optedin"
     }
 }
+
+enum RulesDownloaderConstants {
+    
+    static let RULES_CACHE_NAME = "rules.cache"
+    
+    static let RULES_ZIP_FILE_NAME = "rules.zip"
+    
+    static let RULES_TEMP_DIR = "com.adobe.rules"
+    
+    enum Keys {
+        static let RULES_CACHE_PREFIX = "cached.rules"
+    }
+}
+

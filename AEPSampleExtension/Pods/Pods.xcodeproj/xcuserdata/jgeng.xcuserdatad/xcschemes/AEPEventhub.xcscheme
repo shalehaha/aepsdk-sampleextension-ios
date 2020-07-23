@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D54ED418E7D0F17BA5DFEDDDB997DE69"
-               BuildableName = "AEPEventhub.framework"
-               BlueprintName = "AEPEventhub"
+               BlueprintIdentifier = "6B340F221A4069EB0D736EC858CFE701"
+               BuildableName = "AEPEventHub.framework"
+               BlueprintName = "AEPEventHub"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

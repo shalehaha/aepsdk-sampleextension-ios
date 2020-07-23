@@ -219,7 +219,7 @@ limitations under the License.
 			<key>License</key>
 			<string>Apache V2</string>
 			<key>Title</key>
-			<string>AEPEventhub</string>
+			<string>AEPEventHub</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

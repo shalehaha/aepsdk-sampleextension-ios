@@ -12,20 +12,12 @@
 
 import Foundation
 
-/// Represents an entity type which can be stored in `DataQueue`
-public class DataEntity: NSObject {
-    public let uniqueIdentifier: String
-    public let timestamp: Date
-    public let data: Data?
-
-    /// Generates a new `DataEntity`
+/// Represents the interface of the logging service
+public protocol LoggingService {
+    /// Logs a message
     /// - Parameters:
-    ///   - uniqueIdentifier: a string identifier for `DataEntity`
-    ///   - timestamp: a timestamp for `DataEntity`
-    ///   - data: a JSON-encoded representation for `DataEntity`
-    public init(uniqueIdentifier: String, timestamp: Date, data: Data?) {
-        self.uniqueIdentifier = uniqueIdentifier
-        self.timestamp = timestamp
-        self.data = data
-    }
+    ///   - level: One of the message level identifiers, e.g., DEBUG
+    ///   - label: Name of a label to localize message
+    ///   - message: The string message
+    func log(level: LogLevel, label: String, message: String)
 }
